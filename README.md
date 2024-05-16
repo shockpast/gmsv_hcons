@@ -1,16 +1,2 @@
-# gmod-common-module-base
-This is the module structure I use for my projects.
-
-## Build Workflow
-The [workflow](https://github.com/RaphaelIT7/gmod-common-module-base/tree/workflow) Branch contains a workflow that allows you to build your project with GitHub actions very easily.  
-If you have any requests or issues with the workflow, feel free to open an issue for it.
-
-Example of the workflow:
-```yml
-jobs:
-  build:
-    uses: RaphaelIT7/gmodcommon-module-base/.github/workflows/compile.yml@workflow
-    with:
-      PROJECT_NAME: "template"
-      BUILD_64x: "true"
-```
+# gmsv_hcons_cpp
+It's almost same as [gmsv_hcons](https://github.com/shockpast/gmsv_hcons), except that this one uses actual SourceSDK and other interfaces directly from the game, allowing us to make much more features, than cracking my head with gmod-rs and reinventing memory-based functions.
