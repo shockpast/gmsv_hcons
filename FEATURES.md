@@ -2,7 +2,7 @@
 It's just a superior table for other tables or properties, that will be contained in there, nothing to see there~
 
 ## :version[]
-[gmsv_hcons_cpp]'s Version formatted DD/MM/YY, it could be inconsistent and not up to date always, added for debugging and solving issues easier in future.
+[gmsv_hcons_cpp](https://github.com/shockpast/gmsv_hcons_cpp)'s Version formatted DD/MM/YY, it could be inconsistent and not up to date always, added for debugging and solving issues easier in future.
 
 # hcons.sourcesdk.*
 SourceSDK prop(s) and function(s) exported to Lua environment.
