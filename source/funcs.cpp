@@ -2,7 +2,7 @@
 
 #include <networkstringtabledefs.h>
 
-#include "funcs.hpp"
+#include "funcs.h"
 
 namespace funcs
 {

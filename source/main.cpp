@@ -6,7 +6,7 @@
 #include <eiface.h>
 #include <networkstringtabledefs.h>
 
-#include <funcs.hpp>
+#include <funcs.h>
 
 namespace global {
 	GarrysMod::Lua::ILuaBase* lua = nullptr;
