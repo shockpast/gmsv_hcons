@@ -1,13 +1,11 @@
 # hcons.*
-> Nothing interesting, just a superior table among other tables.
+It's just a superior table for other tables or properties, that will be contained in there, nothing to see there~
 
 ## :version[]
-> Version of [gmsv_hcons_cpp](https://github.com/shockpast/gmsv_hcons_cpp), it could be not up-to-date even after updates, but i'll try to keep it up-to-date.
-
-> Example: "01/01/20" (DD/MM/YY)
+[gmsv_hcons_cpp]'s Version formatted DD/MM/YY, it could be inconsistent and not up to date always, added for debugging and solving issues easier in future.
 
 # hcons.sourcesdk.*
-> Contains SourceSDK functions or properties that could be later accessed in Lua environment.
+SourceSDK prop(s) and function(s) exported to Lua environment.
 
 ## :get_model_cache()
-> Amount of models that are cached on server, maximum is 4096 *(previously 2048, increased by Rubat)* going above will crash server without any warnings.
+Amount of Models cached on server (4096 is maximum, going above will crash server without warnings), this function can be used for detecting crazy amount of models cached in memory and ask users to restart server to clear it.
