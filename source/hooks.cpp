@@ -65,7 +65,7 @@ namespace hooks
 			LUA->ThrowError("'ConMsg' symbol was located, but hook couldn't be created/enabled.");
 	}
 
-	LUA_FUNCTION_STATIC(ignore_message)
+	LUA_FUNCTION_STATIC(conmsg_ignore_mesasge)
 	{
 		bad_messages.push_back(LUA->GetString(1));
 		return 0;
@@ -76,10 +76,8 @@ namespace hooks
 		detour_ConMsg_Initialize(LUA);
 
 		LUA->CreateTable();
-		LUA->CreateTable();
-		LUA->PushCFunction(ignore_message);
-		LUA->SetField(-2, "ignore_message");
-		LUA->SetField(-2, "conmsg");
+		LUA->PushCFunction(conmsg_ignore_mesasge);
+		LUA->SetField(-2, "conmsg_ignore_mesasge");
 		LUA->SetField(-2, "hooks");
 	}
 
