@@ -1,18 +1,19 @@
 ﻿#include <GarrysMod/Lua/Interface.h>
 #include <GarrysMod/FactoryLoader.hpp>
 #include <GarrysMod/InterfacePointers.hpp>
+#include <GarrysMod/FunctionPointers.hpp>
 
-#include <interface.h>
 #include <eiface.h>
 #include <networkstringtabledefs.h>
 
 #include <funcs.h>
+#include <hooks.h>
 
 namespace global {
 	GarrysMod::Lua::ILuaBase* lua = nullptr;
 
-	INetworkStringTableContainer* stringtable_server = nullptr;
-	IVEngineServer* engine_server = nullptr;
+	INetworkStringTableContainer* stringtable = nullptr;
+	IVEngineServer* engine = nullptr;
 
 	static void Initialize(GarrysMod::Lua::ILuaBase* LUA)
 	{
@@ -34,16 +35,17 @@ GMOD_MODULE_OPEN()
 {
 	global::lua = LUA;
 
-	global::stringtable_server = InterfacePointers::NetworkStringTableContainerServer();
-	if (global::stringtable_server == nullptr)
+	global::stringtable = InterfacePointers::NetworkStringTableContainer();
+	if (global::stringtable == nullptr)
 		LUA->ThrowError("Couldn't retrieve 'NetworkStringTableContainer' interface!");
 
-	global::engine_server = InterfacePointers::VEngineServer();
-	if (global::engine_server == nullptr)
+	global::engine = InterfacePointers::VEngineServer();
+	if (global::engine == nullptr)
 		LUA->ThrowError("Couldn't retrieve 'EngineServer' interface!");
 
 	global::Initialize(LUA);
 	funcs::Initialize(LUA);
+	hooks::Initialize(LUA);
 
 	return 0;
 }
@@ -51,6 +53,7 @@ GMOD_MODULE_OPEN()
 GMOD_MODULE_CLOSE()
 {
 	funcs::Deinitialize(LUA);
+	hooks::Deinitialize(LUA);
 	global::Deinitialize(LUA);
 
 	return 0;

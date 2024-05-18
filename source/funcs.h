@@ -1,6 +1,6 @@
 #pragma once
 
-#include "main.h"
+#include <GarrysMod/Lua/Interface.h>
 
 namespace funcs
 {

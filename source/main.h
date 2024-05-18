@@ -2,6 +2,7 @@
 
 #include <GarrysMod/ModuleLoader.hpp>
 #include <GarrysMod/FactoryLoader.hpp>
+#include <GarrysMod/FunctionPointers.hpp>
 #include <GarrysMod/InterfacePointers.hpp>
 #include <GarrysMod/Lua/Interface.h>
 
@@ -19,6 +20,6 @@ namespace global
 {
 	extern GarrysMod::Lua::ILuaBase* lua;
 
-	extern INetworkStringTableContainer* stringtable_server;
-	extern IVEngineServer* engine_server;
+	extern INetworkStringTableContainer* stringtable;
+	extern IVEngineServer* engine;
 }

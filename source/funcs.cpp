@@ -1,14 +1,15 @@
-#include <GarrysMod/FunctionPointers.hpp>
+#include <GarrysMod/Lua/Helpers.hpp>
 
 #include <networkstringtabledefs.h>
 
-#include "funcs.h"
+#include <funcs.h>
+#include <main.h>
 
 namespace funcs
 {
 	LUA_FUNCTION_STATIC(get_model_cache)
 	{
-		LUA->PushNumber(global::stringtable_server->FindTable("modelprecache")->GetNumStrings());
+		LUA->PushNumber(global::stringtable->FindTable("modelprecache")->GetNumStrings());
 		return 1;
 	}
 
