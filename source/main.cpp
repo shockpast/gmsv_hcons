@@ -18,7 +18,7 @@ namespace global {
 	static void Initialize(GarrysMod::Lua::ILuaBase* LUA)
 	{
 		LUA->CreateTable();
-		LUA->PushString("05/18/24");
+		LUA->PushString("05/19/24");
 		LUA->SetField(-2, "version");
 		LUA->Push(-1);
 		LUA->SetField(GarrysMod::Lua::INDEX_GLOBAL, "hcons");
