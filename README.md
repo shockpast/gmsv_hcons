@@ -1,4 +1,4 @@
-# gmsv_hcons_cpp
+# gmsv_hcons
 It's almost same as [gmsv_hcons](https://github.com/shockpast/gmsv_hcons), except that this one uses actual SourceSDK and other interfaces directly from the game, allowing us to make much more features, than cracking my head with gmod-rs and reinventing memory-based functions.
 
 ## Resources
