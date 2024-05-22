@@ -3,7 +3,22 @@ name: Build
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
+  filter:
+    runs-on: ubuntu-latest
+    outputs:
+      source: ${{ steps.filter.outputs.source }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            source:
+              - 'source/**'
+
   build:
+    needs: [filter]
+    if: needs.filter.outputs.source == 'true'
     uses: RaphaelIT7/gmod-common-module-base/.github/workflows/compile.yml@workflow
     with:
       PROJECT_NAME: "hcons"
