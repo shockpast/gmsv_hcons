@@ -7,6 +7,8 @@ jobs:
     uses: RaphaelIT7/gmod-common-module-base/.github/workflows/compile.yml@workflow
     with:
       PROJECT_NAME: "hcons"
+      BUILD_WINDOWS: "false"
+      UPLOAD: "artifact"
       # build_64x is "false" by default
       # build_32x is "true" by default
       # realm is "sv" by default
@@ -28,3 +30,4 @@ jobs:
           prerelease: true
           append_body: true
           generate_release_notes: true
+          files: gmsv_hcons_linux.dll
