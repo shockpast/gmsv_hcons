@@ -21,7 +21,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ref(${{ github.ref }})
           body: |
             ${{ github.ref }} release was published using automated action.
           draft: false
