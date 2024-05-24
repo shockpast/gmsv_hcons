@@ -9,7 +9,13 @@
 #include <funcs.h>
 #include <hooks.h>
 
-namespace global {
+namespace variables
+{
+	bool hide_server = false;
+}
+
+namespace global 
+{
 	GarrysMod::Lua::ILuaBase* lua = nullptr;
 
 	INetworkStringTableContainer* stringtable = nullptr;
@@ -18,8 +24,8 @@ namespace global {
 	static void Initialize(GarrysMod::Lua::ILuaBase* LUA)
 	{
 		LUA->CreateTable();
-		LUA->PushString("05/19/24");
-		LUA->SetField(-2, "version");
+			LUA->PushString("05/19/24");
+			LUA->SetField(-2, "version");
 		LUA->Push(-1);
 		LUA->SetField(GarrysMod::Lua::INDEX_GLOBAL, "hcons");
 	}
@@ -29,6 +35,21 @@ namespace global {
 		LUA->PushNil();
 		LUA->SetField(GarrysMod::Lua::INDEX_GLOBAL, "hcons");
 	}
+}
+
+namespace modules
+{
+#ifdef SYSTEM_WINDOWS
+	SourceSDK::ModuleLoader tier0("tier0");
+	SourceSDK::ModuleLoader vphysics("vphysics");
+	SourceSDK::ModuleLoader server("server");
+	SourceSDK::ModuleLoader engine("engine");
+#elif SYSTEM_LINUX
+	SourceSDK::ModuleLoader tier0("libtier0_srv");
+	SourceSDK::ModuleLoader vphysics("vphysics_srv");
+	SourceSDK::ModuleLoader server("server_srv");
+	SourceSDK::ModuleLoader engine("engine_srv");
+#endif
 }
 
 GMOD_MODULE_OPEN()
