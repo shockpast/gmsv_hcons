@@ -1,4 +1,4 @@
-name: Build
+name: Build & Release
 
 on:
   push:
@@ -23,17 +23,17 @@ jobs:
   #           source:
   #             - 'source/**'
 
-  build:
+  build-release:
     uses: RaphaelIT7/gmod-common-module-base/.github/workflows/compile-release.yml@workflow
     permissions:
       contents: write
     with:
       PROJECT_NAME: "hcons"
       BUILD_WINDOWS: "false"
-      ARTIFACT_EXPIRE: "3"
+      BUILD_64x: "false"
+      BUILD_32x: "true"
+      ARTIFACT_EXPIRE: "1"
       RELEASE_DRAFT: true
-      RELEASE_PDB: true
-      RELEASE_DELETEARTIFACT: true
       # build_64x is "false" by default
       # build_32x is "true" by default
       # realm is "sv" by default
