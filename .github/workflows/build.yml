@@ -27,3 +27,21 @@ jobs:
       # build_64x is "false" by default
       # build_32x is "true" by default
       # realm is "sv" by default
+
+  release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Export Date into Environment Variable
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: /artifact/
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: /artifact/gmsv_hcons_linux.dll.zip
