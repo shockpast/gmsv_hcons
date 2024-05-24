@@ -5,6 +5,7 @@ on:
     paths:
       - 'source/**'
       - 'premake5.lua'
+      # TODO: delete it when ended with dev/workflow
       - '.github/workflows/build.yml'
   pull_request:
     paths:
@@ -21,6 +22,7 @@ jobs:
       # because most detours will work only for linux
       BUILD_WINDOWS: "false"
       ARTIFACT_EXPIRE: "3"
+      UPLOAD_PDB: "true"
 
   release:
     runs-on: ubuntu-latest
