@@ -5,8 +5,12 @@ on:
     paths:
       - 'source/**'
       - 'premake5.lua'
+      # TODO: delete it when ended with dev/workflow
       - '.github/workflows/build.yml'
   pull_request:
+    paths:
+      - 'source/**'
+      - '.github/workflows/build.yml'
   workflow_dispatch:
 
 jobs:
@@ -14,25 +18,38 @@ jobs:
     uses: RaphaelIT7/gmod-common-module-base/.github/workflows/compile.yml@workflow
     with:
       PROJECT_NAME: "hcons"
+      # i don't care pretty much about windows
+      # because most detours will work only for linux
       BUILD_WINDOWS: "false"
       ARTIFACT_EXPIRE: "3"
 
   release:
+    runs-on: ubuntu-latest
     needs: [build]
+    # we don't need pull requests, nuh uh!
+    if: github.event_name == 'push'
     permissions:
       contents: write
-    runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: "hcons"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Download Artifact
+      - name: Create Folder
+        run: |
+          mkdir linux_bin/
+      - name: Download ${{ env.PROJECT_NAME }} (DLL)
         uses: actions/download-artifact@v4
         with:
-          path: /artifact/
+          # ! I CAN'T GET ENV FROM OTHER JOB
+          # ! THEREFORE THIS NAME IS STATIC!
+          name: "gmsv_${{ env.PROJECT_NAME }}_linux.dll"
+          path: "linux_bin/"
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: /artifact/gmsv_hcons_linux.dll
+          files: linux_bin/gmsv_hcons_linux.dll
           generate_release_notes: true
           draft: true
           name: ${{ github.run_id }}
+          tag_name: ${{ github.run_id }}
