@@ -22,7 +22,6 @@ jobs:
       # because most detours will work only for linux
       BUILD_WINDOWS: "false"
       ARTIFACT_EXPIRE: "3"
-      UPLOAD_PDB: "true"
 
   release:
     runs-on: ubuntu-latest
