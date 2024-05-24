@@ -45,11 +45,6 @@ jobs:
           # ! THEREFORE THIS NAME IS STATIC!
           name: "gmsv_${{ env.PROJECT_NAME }}_linux.dll"
           path: "linux_bin/"
-      - name: Download ${{ env.PROJECT_NAME }} (PDB)
-        uses: actions/download-artifact@v4
-        with:
-          name: "gmsv_${{ env.PROJECT_NAME }}_linux.pdb"
-          path: "linux_bin/"
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
