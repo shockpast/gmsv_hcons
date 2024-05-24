@@ -10,48 +10,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  # filter:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     source: ${{ steps.filter.outputs.source }}
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: dorny/paths-filter@v3
-  #       id: filter
-  #       with:
-  #         filters: |
-  #           source:
-  #             - 'source/**'
-
   build-release:
     uses: RaphaelIT7/gmod-common-module-base/.github/workflows/compile-release.yml@workflow
     permissions:
       contents: write
     with:
       PROJECT_NAME: "hcons"
+      # required???
+      # https://github.com/RaphaelIT7/gmod-common-module-base/blob/2da793e109cb89e20fd3bcc0b6a66f817bf7e8a2/.github/workflows/compile-release.yml#L786-L804
+      BUILD_LINUX: "true"
       BUILD_WINDOWS: "false"
       BUILD_64x: "false"
       BUILD_32x: "true"
       ARTIFACT_EXPIRE: "1"
       RELEASE_DRAFT: true
-      # build_64x is "false" by default
-      # build_32x is "true" by default
-      # realm is "sv" by default
-
-  # release:
-  #   needs: [build]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #     - name: Export Date into Environment Variable
-  #       id: date
-  #       run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-  #     - name: Download Artifact
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         path: /artifact/
-  #     - name: Create Release
-  #       uses: softprops/action-gh-release@v2
-  #       with:
-  #         files: /artifact/gmsv_hcons_linux.dll.zip
+      UPLOAD_PDB: true
+      RELEASE_DELETEARTIFACT: true
