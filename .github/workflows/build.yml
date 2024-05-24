@@ -5,24 +5,34 @@ on:
     paths:
       - 'source/**'
       - 'premake5.lua'
-      - '.github/workflows/build.yml'
+      - '.github/workflows/compile-release.yml'
   pull_request:
   workflow_dispatch:
 
 jobs:
-  build-release:
-    uses: RaphaelIT7/gmod-common-module-base/.github/workflows/compile-release.yml@workflow
-    permissions:
-      contents: write
+  build:
+    uses: RaphaelIT7/gmod-common-module-base/.github/workflows/compile.yml@workflow
     with:
       PROJECT_NAME: "hcons"
-      # required???
-      # https://github.com/RaphaelIT7/gmod-common-module-base/blob/2da793e109cb89e20fd3bcc0b6a66f817bf7e8a2/.github/workflows/compile-release.yml#L786-L804
-      BUILD_LINUX: "true"
       BUILD_WINDOWS: "false"
-      BUILD_64x: "false"
-      BUILD_32x: "true"
-      ARTIFACT_EXPIRE: "1"
-      RELEASE_DRAFT: true
-      UPLOAD_PDB: true
-      RELEASE_DELETEARTIFACT: true
+      ARTIFACT_EXPIRE: "3"
+
+  release:
+    needs: [build]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: /artifact/
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: /artifact/gmsv_hcons_linux.dll
+          generate_release_notes: true
+          draft: true
+          name: ${{ github.run_id }}
