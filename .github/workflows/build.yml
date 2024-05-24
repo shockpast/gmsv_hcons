@@ -5,7 +5,7 @@ on:
     paths:
       - 'source/**'
       - 'premake5.lua'
-      - '.github/workflows/compile-release.yml'
+      - '.github/workflows/build.yml'
   pull_request:
   workflow_dispatch:
 
